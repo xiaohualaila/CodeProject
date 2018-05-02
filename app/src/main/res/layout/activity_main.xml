@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="1"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            android:layout_weight="0.04">
+
+            <!--<TextView-->
+                <!--android:text="serial"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="34dp"-->
+                <!--android:id="@+id/serial" />-->
+
+            <!--<Spinner-->
+                <!--android:layout_width="38dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:id="@+id/serial_spinner"-->
+                <!--android:layout_weight="0.26" />-->
+
+            <!--<TextView-->
+                <!--android:text="baudrate"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="36dp"-->
+                <!--android:id="@+id/baudrate" />-->
+
+            <!--<Spinner-->
+                <!--android:layout_width="101dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:id="@+id/baud_spinner"-->
+                <!--android:layout_weight="0.06" />-->
+
+            <Button
+                android:text="open"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/open"
+                android:layout_weight="0.06" />
+
+            <Button
+                android:text="close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/close" />
+
+            <Button
+                android:text="exit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/exit"
+                android:layout_weight="0.05" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:text="clear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/clear" />
+
+            <Button
+                android:text="send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/send" />
+
+            <EditText
+                android:layout_width="195dp"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/send_text" />
+
+            <CheckBox
+                android:text="HEX"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/hex_disply" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="note:\nttymxc1  matchs  232TX\nttymxc3  matchs  TTL-TX\nttymxc4  matchs  485A"/>
+        </LinearLayout>
+
+        <ScrollView
+            android:id="@+id/scroll_view"
+            android:layout_width="835dp"
+            android:layout_height="431dp"
+            android:scrollbars="vertical"
+            android:fadingEdge="vertical"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/recv_view"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                />
+        </ScrollView>
+
+    </LinearLayout>
+</RelativeLayout>
