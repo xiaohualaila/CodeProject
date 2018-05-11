@@ -29,7 +29,9 @@ public class MainActivity extends AppCompatActivity {
     private Hardware hardware;
     private int fd_serial = -1;
     private int recv_flag = 1;
+    private boolean flag = true;
 
+    private String qianCode = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
                 open.setClickable(false);
                 recv_flag = 1;
 
-//                System.out.println("choosed_serial = " + choosed_serial + "  choosed_baud = " + choosed_baud);
                 fd_serial = hardware.openSerialPort("/dev/ttyS3",115200,8,1);
                 if(fd_serial > 0)
                 {
@@ -143,24 +144,45 @@ public class MainActivity extends AppCompatActivity {
 
             byte[] buf= new byte[512];
             int len = hardware.readSerialPort(fd_serial, buf, 1000);
-            recv_view.append("len:"+len + "\n");
-            if(len >0) {
-//                System.out.println("len:" + len);
 
+            if(len >0) {
                     byte[] newbuf = new byte[len];
                     for (int i = 0; i < len; i++) {
                         newbuf[i] = buf[i];
                     }
-                    String s =new String(newbuf);
 
-                    recv_view.append("接收："+s + "\n");
-                   Log.i("sss",s);
-                    scrollview.fullScroll(ScrollView.FOCUS_DOWN);
-
+                String str ="";
+                String str1 = "";
+                String str2 = "";
+                if(flag){
+                    str1 =new String(newbuf);
+                    qianCode = str1;
+                    flag =panduan(str1,len);
+                }else {
+                    str2 =new String(newbuf);
+                    str = qianCode + str2;
+                    panduan(str,len);
+                    qianCode = "";
+                    flag = true;
                 }
-
+            }
         }
 };
+
+    public boolean panduan(String str, int len ){
+        String s = str.substring(str.length()-1,str.length());
+        String s1 = str.substring(0,1);
+        if(s.equals("&") && s1.equals("&")){
+            String  code = str.substring(1,str.length()-2);
+            recv_view.append("len:"+len + "\n");
+            recv_view.append("接收：" +code +  "\n");
+            Log.i("sss",code);
+            scrollview.fullScroll(ScrollView.FOCUS_DOWN);
+            return true;
+        }else {
+            return false;
+        }
+    }
 
 
     class readThread extends Thread//监听串口信息线程
@@ -171,11 +193,12 @@ public class MainActivity extends AppCompatActivity {
                 if (hardware.select(fd_serial, 1, 0) == 1) {
 
                     //System.out.println(">>>>>>>>>sendMessage");
+
                     Message msg = new Message();
                     handler.sendMessage(msg);
                 }
                 try {
-                    Thread.sleep(600);
+                    Thread.sleep(500);
                 } catch (InterruptedException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
